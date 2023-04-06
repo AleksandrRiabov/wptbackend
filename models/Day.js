@@ -1,0 +1,20 @@
+import mongoose from "mongoose";
+
+const daySchema = new mongoose.Schema({
+  date: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  day: { type: String, required: true },
+  products: [
+    {
+      name: String,
+      cases: String,
+      pallets: String,
+      category: String,
+    },
+  ],
+});
+
+export default mongoose.model("Day", daySchema);
