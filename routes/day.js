@@ -1,9 +1,8 @@
 import { Router } from "express";
-import {getDayData} from '../controllers/day.js'
+import { getDaysDataInRange } from "../controllers/day.js";
+import { formatDates } from "../middleware/dayRoutes.js";
 const router = Router();
 
+router.get("/:range?", formatDates, getDaysDataInRange);
 
-router.get("/", getDayData)
-
-
-export default  router
+export default router;
