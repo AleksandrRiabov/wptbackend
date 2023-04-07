@@ -5,7 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import dayRoutes from "./routes/day.js"
+import dayRoutes from "./routes/day.js";
 
 // CONFIGURATIONS
 dotenv.config();
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // Routes
-app.use('/day', dayRoutes);
+app.use("/day", dayRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000;
