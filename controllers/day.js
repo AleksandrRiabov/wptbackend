@@ -26,10 +26,12 @@ export const createDay = async (req, res) => {
 
   try {
     const formatedDate = date?.split("-").reverse().join("-");
+
     await Day.create({
       date: new Date(formatedDate),
       day: new Date(formatedDate).getDay(),
       products,
+      editedBy: [{ name: "D3eveloper", date: new Date() }],
     });
 
     res.status(201).json({ message: `${date} Day has been created` });
@@ -42,9 +44,16 @@ export const createDay = async (req, res) => {
 //Update Day figures or add the product to the list
 export const updateDayFigures = async (req, res) => {
   const { _id } = req.body;
+
   try {
+    const foundDay = await Day.findById(_id);
+    const editedBy = [
+      ...foundDay.editedBy,
+      { name: "D3eveloper", date: new Date() },
+    ];
     const updatedDay = await Day.findByIdAndUpdate(_id, {
       products: req.body.products,
+      editedBy,
     });
     updatedDay.save();
     res.status(200).json({ message: "Details has been updated" });

@@ -16,6 +16,12 @@ const daySchema = new mongoose.Schema(
         category: String,
       },
     ],
+    editedBy: [
+      {
+        name: String,
+        date: Date,
+      },
+    ],
   },
   { timestamps: true }
 );
