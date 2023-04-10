@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 export const trailerSchema = new mongoose.Schema(
   {
     reference: { type: String, required: true, unique: true },
-    sentDate: {
-      type: Date,
+    trailerNumber: {
+      type: String,
       required: true,
     },
-    number: {
-      type: String,
+    sentDate: {
+      type: Date,
       required: true,
     },
     received: Date,
