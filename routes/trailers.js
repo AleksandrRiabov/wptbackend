@@ -1,9 +1,14 @@
 import { Router } from "express";
-import { getTrailer } from "../controllers/trailers.js";
+import { createTrailer } from "../controllers/trailers.js";
+import { getTrailers } from "../controllers/trailers.js";
 import { formatDates } from "../middleware/dayRoutes.js";
+import { handleQueryParams } from "../middleware/trailersRoutes.js";
 const router = Router();
 
 //Get Days Data within specified date range
-router.get("/query/:number", getTrailer);
+router.get("/", handleQueryParams, getTrailers);
+
+//Create new trailer
+router.post("/", createTrailer);
 
 export default router;

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const trailerSchema = new mongoose.Schema(
+export const trailerSchema = new mongoose.Schema(
   {
     reference: { type: String, required: true, unique: true },
     sentDate: {
@@ -16,12 +16,17 @@ const trailerSchema = new mongoose.Schema(
     loadType: String,
     freightType: String,
     cert: { type: Boolean, default: false },
-    extraCost: { cost: Number, comment: String },
-    algecirasFerry: { cost: Number },
-    rejectedBySIVEP: { cost: Number },
-    holdOver: { days: Number, cost: Number },
-    nonStop: { cost: Number },
+    extraCost: { cost: { type: Number, default: 0 }, comment: String },
+    algecirasFerry: { cost: { type: Number, default: 0 } },
+    rejectedBySIVEP: { cost: { type: Number, default: 0 } },
+    holdOver: {
+      days: { type: Number, default: 0 },
+      cost: { type: Number, default: 0 },
+    },
+    nonStop: { cost: { type: Number, default: 0 } },
     crossed: String,
+    comments: String,
+    late: { type: Boolean, default: false },
     products: [
       {
         name: String,
