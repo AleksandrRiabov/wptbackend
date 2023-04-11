@@ -13,14 +13,16 @@ export const handleQueryParams = (req, res, next) => {
     ],
   };
 
-  if (req.query.sentDateFrom && req.query.sentDateTo) {
+  if (req.query.sentDateFrom) {
     // If sentDateFrom and sentDateTo are provided, add them to the query object
     query.sentDate = {
       $gte: new Date(req.query.sentDateFrom),
-      $lte: new Date(req.query.sentDateTo),
+      $lte: req.query.sentDateTo
+        ? new Date(req.query.sentDateTo)
+        : new Date("2028-12-31"),
     };
   }
-
+  console.log(new Date(req.query.sentDateTo), new Date("2028-12-31"));
   // Loop through all keys in the request query object and add filters to the query object
   Object.keys(req.query).forEach((key) => {
     if (!Object.keys(trailerSchema.paths).includes(key)) {
