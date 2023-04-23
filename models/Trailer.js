@@ -7,13 +7,14 @@ export const trailerSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    contractor: String,
     sentDate: {
       type: Date,
       required: true,
     },
-    deilveryDate: {
+    deliveryDate: {
       type: Date,
-      default: null,
+      required: true,
     },
     received: { type: Date, default: null },
     clearance: { type: Date, default: null },

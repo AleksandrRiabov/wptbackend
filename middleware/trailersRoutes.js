@@ -22,7 +22,7 @@ export const handleQueryParams = (req, res, next) => {
         : new Date("2028-12-31"),
     };
   }
-  console.log(new Date(req.query.sentDateTo), new Date("2028-12-31"));
+
   // Loop through all keys in the request query object and add filters to the query object
   Object.keys(req.query).forEach((key) => {
     if (!Object.keys(trailerSchema.paths).includes(key)) {

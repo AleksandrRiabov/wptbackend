@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { createTrailer } from "../controllers/trailers.js";
 import { getTrailers } from "../controllers/trailers.js";
-import { formatDates } from "../middleware/dayRoutes.js";
 import { handleQueryParams } from "../middleware/trailersRoutes.js";
 const router = Router();
 
