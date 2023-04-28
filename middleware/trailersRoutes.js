@@ -13,13 +13,17 @@ export const handleQueryParams = (req, res, next) => {
     ],
   };
 
-  if (req.query.sentDateFrom) {
-    // If sentDateFrom and sentDateTo are provided, add them to the query object
+  if (req.query.dateFrom) {
+    // Update the dateFrom and dateTo formats before adding them to the query object
+    const dateFrom = req.query.dateFrom.split("-").reverse().join("-");
+    const dateTo = req.query.dateTo
+      ? req.query.dateTo.split("-").reverse().join("-")
+      : "2099-12-31";
+
+    // Add the date range to the query object
     query.sentDate = {
-      $gte: new Date(req.query.sentDateFrom),
-      $lte: req.query.sentDateTo
-        ? new Date(req.query.sentDateTo)
-        : new Date("2028-12-31"),
+      $gte: new Date(dateFrom),
+      $lte: new Date(dateTo),
     };
   }
 
