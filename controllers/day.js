@@ -4,13 +4,13 @@ import Day from "../models/Day.js";
 //If only start date provided, the end date by default is Today.
 // If no date range specified, it will return info for current day (Today)
 export const getDaysDataInRange = async (req, res) => {
-  const { startDate, endDate } = req;
+  const { dateFrom, dateTo } = req;
 
   try {
     const days = await Day.find({
       date: {
-        $gte: startDate,
-        $lt: endDate,
+        $gte: dateFrom,
+        $lt: dateTo,
       },
     });
     res.json(days);
