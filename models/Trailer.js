@@ -22,22 +22,26 @@ export const trailerSchema = new mongoose.Schema(
     freightType: String,
     cert: { type: Boolean, default: false },
     alcohol: { type: Boolean, default: false },
-    extraCost: { cost: { type: Number, default: 0 }, comment: String },
-    algecirasFerry: { cost: { type: Number, default: 0 } },
-    rejectedBySIVEP: { cost: { type: Number, default: 0 } },
-    holdOver: {
-      days: { type: Number, default: 0 },
-      cost: { type: Number, default: 0 },
+    extraCost: {
+      type: Map,
+      of: {
+        cost: { type: Number, default: 0 },
+      },
+      default: new Map([
+        ["algecirasFerry", { cost: 50 }],
+        ["rejectedBySIVEP", { cost: 50 }],
+        ["holdOver", { days: 0, cost: 50 }],
+        ["nonStop", { cost: 50 }],
+      ])
     },
-    nonStop: { cost: { type: Number, default: 0 } },
     crossed: String,
     comments: String,
     late: { type: Boolean, default: false },
     products: [
       {
         name: String,
-        cases: String,
-        pallets: String,
+        cases: Number,
+        pallets: Number,
         category: String,
       },
     ],
