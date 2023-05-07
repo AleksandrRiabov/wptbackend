@@ -10,4 +10,7 @@ router.get("/", handleQueryParams, getTrailers);
 //Create new trailer
 router.post("/", createTrailer);
 
+//Edit trailer
+router.put("/:id/edit", createTrailer);
+
 export default router;
