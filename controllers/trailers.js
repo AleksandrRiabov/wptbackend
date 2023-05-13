@@ -32,11 +32,15 @@ export const createTrailer = async (req, res) => {
 //  EDIT TRAILER DETAILS
 export const editTrailer = async (req, res) => {
   try {
-    const updatedTrailer = await Trailer.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.status(200).json({ message: "Trailer details has been updated", updatedTrailer });
+    const updatedTrailer = await Trailer.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res
+      .status(200)
+      .json({ message: "Trailer details has been updated", updatedTrailer });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
-
-

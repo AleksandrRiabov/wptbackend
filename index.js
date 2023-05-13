@@ -21,7 +21,7 @@ app.use(cors());
 
 // Routes
 app.use("/day", dayRoutes);
-app.use("/trailers", trailersRoutes);
+app.use("/", trailersRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000;
