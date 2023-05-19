@@ -7,6 +7,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import dayRoutes from "./routes/day.js";
 import trailersRoutes from "./routes/trailers.js";
+import optionsRoutes from "./routes/options.js";
 
 // CONFIGURATIONS
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(cors());
 // Routes
 app.use("/day", dayRoutes);
 app.use("/", trailersRoutes);
+app.use("/options", optionsRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000;
