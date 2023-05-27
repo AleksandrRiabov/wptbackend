@@ -32,43 +32,12 @@ export const updateOptions = async (req, res) => {
       case "freightType":
       case "contractor":
       case "crossed":
+      case "products":
         // Validate the options property
         if (!Array.isArray(options)) {
           return res.status(400).json("Invalid options property");
         }
-
         updateFields = { [name]: options };
-        break;
-
-      case "products":
-        // Validate the options property
-        if (!options || typeof options !== "object") {
-          return res.status(400).json("Invalid options property");
-        }
-
-        // Extract the name and category properties from options
-        const { name: productName, category } = options;
-
-        // Validate the extracted properties
-        if (
-          !productName ||
-          !category ||
-          typeof productName !== "string" ||
-          typeof category !== "string"
-        ) {
-          return res
-            .status(400)
-            .json("Invalid name or category property in options");
-        }
-
-        updateFields = {
-          $push: {
-            products: {
-              name: productName,
-              category: category,
-            },
-          },
-        };
         break;
 
       default:
