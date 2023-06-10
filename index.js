@@ -8,6 +8,15 @@ import morgan from "morgan";
 import dayRoutes from "./routes/day.js";
 import trailersRoutes from "./routes/trailers.js";
 import optionsRoutes from "./routes/options.js";
+import cookieParser from "cookie-parser";
+import { initializeApp } from "firebase-admin/app";
+import admin from "firebase-admin";
+import serviceKey from "./serviceKey.json" assert { type: "json" };
+import { checkAuth } from "./middleware/checkAuth.js";
+
+const firebase = initializeApp({
+  credential: admin.credential.cert(serviceKey),
+});
 
 // CONFIGURATIONS
 dotenv.config();
@@ -16,14 +25,21 @@ app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Replace with the actual origin of your frontend app
+    credentials: true,
+  })
+);
 
 // Routes
 app.use("/day", dayRoutes);
-app.use("/", trailersRoutes);
-app.use("/options", optionsRoutes);
+app.use("/", checkAuth, trailersRoutes);
+app.use("/options", checkAuth, optionsRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000;
