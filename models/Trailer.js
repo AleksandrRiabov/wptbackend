@@ -32,7 +32,7 @@ export const trailerSchema = new mongoose.Schema(
         ["rejectedBySIVEP", { cost: 50 }],
         ["holdOver", { days: 0, cost: 50 }],
         ["nonStop", { cost: 50 }],
-      ])
+      ]),
     },
     crossed: String,
     comments: String,
@@ -45,13 +45,16 @@ export const trailerSchema = new mongoose.Schema(
         category: String,
       },
     ],
-    editedBy: [
-      {
-        name: String,
-        date: Date,
-      },
-    ],
+    editedBy: {
+      name: String,
+      email: String,
+    },
+    createdBy: {
+      name: String,
+      email: String,
+    },
   },
+
   { timestamps: true }
 );
 

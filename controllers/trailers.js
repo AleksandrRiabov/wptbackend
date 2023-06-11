@@ -18,6 +18,10 @@ export const getTrailers = async (req, res) => {
 // ======================
 //  CREATE NEW TRAILER DETAILS
 export const createTrailer = async (req, res) => {
+  req.body.createdBy = {
+    name: req.user.name,
+    email: req.user.email,
+  };
   try {
     const newTrailer = await Trailer.create(req.body);
     res
@@ -31,6 +35,7 @@ export const createTrailer = async (req, res) => {
 // ======================
 //  EDIT TRAILER DETAILS
 export const editTrailer = async (req, res) => {
+  req.body.editedBy = { name: req.user.name, email: req.user.email };
   try {
     const updatedTrailer = await Trailer.findByIdAndUpdate(
       req.params.id,
