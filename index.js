@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // Replace with the actual origin of your frontend app
+    origin: "https://warehouse-planning-tool.onrender.com/",
     credentials: true,
   })
 );
