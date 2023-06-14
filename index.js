@@ -11,8 +11,12 @@ import optionsRoutes from "./routes/options.js";
 import cookieParser from "cookie-parser";
 import { initializeApp } from "firebase-admin/app";
 import admin from "firebase-admin";
-import serviceKey from "./serviceKey.json" assert { type: "json" };
 import { checkAuth } from "./middleware/checkAuth.js";
+import { readFile } from "fs/promises";
+
+const serviceKey = JSON.parse(
+  await readFile(new URL("./serviceKey.json", import.meta.url))
+);
 
 const firebase = initializeApp({
   credential: admin.credential.cert(serviceKey),
