@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: "https://warehouse-planning-tool.onrender.com/",
+    origin: "https://warehouse-planning-tool.onrender.com",
     credentials: true,
   })
 );
