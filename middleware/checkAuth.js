@@ -1,27 +1,15 @@
 import admin from "firebase-admin";
 
 export const checkAuth = (req, res, next) => {
-  const { cookie } = req.headers;
+  const { authorization } = req.headers;
 
-  // Get the access token from the secure cookie named "accessToken"
-  const accessToken =
-    cookie &&
-    cookie
-      .split(";")
-      .find((c) => c.trim().startsWith("accessToken="))
-      ?.split("=")[1];
+  if (authorization && authorization.startsWith("Bearer ")) {
+    const accessToken = authorization.slice(7); // Remove "Bearer " prefix
 
-  if (accessToken) {
-    verifyIdToken(accessToken);
-  } else {
-    // No access token provided in the request cookies
-    res.status(401).json({ error: "Access token cookie missing or invalid" });
-  }
-
-  function verifyIdToken(token) {
+    // Verify the access token using the Firebase Admin SDK
     admin
       .auth()
-      .verifyIdToken(token)
+      .verifyIdToken(accessToken)
       .then((decodedToken) => {
         req.user = decodedToken; // Store the decoded token in the request object
         next(); // Proceed to the next middleware or route handler
@@ -30,5 +18,8 @@ export const checkAuth = (req, res, next) => {
         // Token verification failed
         res.status(401).json({ error: "Invalid access token" });
       });
+  } else {
+    // No access token provided in the request headers
+    res.status(401).json({ error: "Access token missing or invalid" });
   }
 };
