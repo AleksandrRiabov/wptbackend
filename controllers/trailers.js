@@ -49,3 +49,14 @@ export const editTrailer = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// ======================
+//  DELETE TRAILER
+export const deleteTrailer = async (req, res) => {
+  try {
+    const removed = await Trailer.findOneAndDelete({ _id: req.params.id });
+    res.status(203).json({ message: "Trailer has been remmoved from DB" });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong.." });
+  }
+};

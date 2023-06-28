@@ -44,15 +44,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: "https://warehouse-planning-tool.onrender.com",
+    origin: ["https://warehouse-planning-tool.onrender.com", 'http://localhost:3000'],
     credentials: true,
   })
 );
 
 // Routes
 app.use("/day", dayRoutes);
-app.use("/", checkAuth, trailersRoutes);
-app.use("/options", checkAuth, optionsRoutes);
+app.use("/", checkAuth,  trailersRoutes);
+app.use("/options",checkAuth, optionsRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000;

@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { createTrailer, editTrailer } from "../controllers/trailers.js";
+import {
+  createTrailer,
+  deleteTrailer,
+  editTrailer,
+} from "../controllers/trailers.js";
 import { getTrailers } from "../controllers/trailers.js";
 import { handleQueryParams } from "../middleware/trailersRoutes.js";
 const router = Router();
@@ -12,5 +16,8 @@ router.post("/trailer/", createTrailer);
 
 //Edit trailer
 router.put("/trailer/:id", editTrailer);
+
+// Delete Trailer
+router.delete("/trailer/:id", deleteTrailer);
 
 export default router;
