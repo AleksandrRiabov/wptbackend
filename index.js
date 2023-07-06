@@ -12,6 +12,7 @@ import cookieParser from "cookie-parser";
 import { initializeApp } from "firebase-admin/app";
 import admin from "firebase-admin";
 import { checkAuth } from "./middleware/checkAuth.js";
+import http from "http";
 
 // CONFIGURATIONS
 dotenv.config();
@@ -44,15 +45,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: ["https://warehouse-planning-tool.onrender.com", 'http://localhost:3000'],
+    origin: [
+      "https://warehouse-planning-tool.onrender.com",
+      "http://localhost:3000",
+    ],
     credentials: true,
   })
 );
 
 // Routes
 app.use("/day", dayRoutes);
-app.use("/", checkAuth,  trailersRoutes);
-app.use("/options",checkAuth, optionsRoutes);
+app.use("/", checkAuth, trailersRoutes);
+app.use("/options", checkAuth, optionsRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000;
@@ -65,3 +69,11 @@ mongoose
     app.listen(PORT, () => console.log(`Server PORT ${PORT}`));
   })
   .catch((err) => console.log(err));
+
+app.get("/server-wake-up-alarm", (req, res) => res.status(200));
+
+setInterval(function () {
+  http.get(
+    "https://warehouse-planning-tool.onrender.com/#/server-wake-up-alarm"
+  );
+}, 300000);
