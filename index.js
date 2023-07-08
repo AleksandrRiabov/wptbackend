@@ -74,6 +74,6 @@ app.get("/server-wake-up-alarm", (req, res) => res.status(200));
 
 setInterval(function () {
   http.get(
-    "https://warehouse-planning-tool.onrender.com/#/server-wake-up-alarm"
+    "http://warehouse-planning-tool.onrender.com/#/server-wake-up-alarm"
   );
 }, 300000);
