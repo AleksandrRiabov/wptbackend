@@ -23,7 +23,7 @@ export const getDaysDataInRange = async (req, res) => {
 //Create new day
 export const createDay = async (req, res) => {
   const { date, products } = req.body;
-
+  console.log(req.user);
   try {
     const formatedDate = date?.split("-").reverse().join("-");
 
@@ -31,7 +31,7 @@ export const createDay = async (req, res) => {
       date: new Date(formatedDate),
       day: new Date(formatedDate).getDay(),
       products,
-      editedBy: [{ name: "D3eveloper", date: new Date() }],
+      editedBy: req.user.name || req.user.email,
     });
 
     res.status(201).json({ message: `${date} Day has been created` });
@@ -49,7 +49,7 @@ export const updateDayFigures = async (req, res) => {
     const foundDay = await Day.findById(_id);
     const editedBy = [
       ...foundDay.editedBy,
-      { name: "D3eveloper", date: new Date() },
+      { name: "Developer", date: new Date() },
     ];
     const updatedDay = await Day.findByIdAndUpdate(_id, {
       products: req.body.products,

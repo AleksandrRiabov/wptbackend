@@ -7,7 +7,7 @@ const daySchema = new mongoose.Schema(
       unique: true,
       required: true,
     },
-    day: { type: String, required: true },
+    day: { type: String },
     products: [
       {
         name: String,
@@ -16,12 +16,7 @@ const daySchema = new mongoose.Schema(
         category: String,
       },
     ],
-    editedBy: [
-      {
-        name: String,
-        date: Date,
-      },
-    ],
+    editedBy: String,
   },
   { timestamps: true }
 );
