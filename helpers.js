@@ -97,8 +97,6 @@ export const calculateMedianCoefficients = (documents) => {
     } else {
       return {
         name,
-        pallets: 0,
-        cases: 0,
         coefficient: medianCoefficientsAndCases[name]?.coefficient,
         expectedCases: Math.round(medianCoefficientsAndCases[name]?.cases),
       };

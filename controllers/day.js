@@ -13,6 +13,7 @@ import { isValid, format } from "date-fns";
 export const getDaysDataInRange = async (req, res) => {
   const { dateFrom, dateTo } = req;
   const { withStats } = req.query;
+  console.log(withStats)
 
   if (!withStats) {
     try {
@@ -31,24 +32,28 @@ export const getDaysDataInRange = async (req, res) => {
       return res.status(403).json({ message: "Invalid Date format." });
     }
 
-    const dateArray = getDatesForWeeksBefore(dateTo, 6);
+    const dateArray = getDatesForWeeksBefore(dateTo, 10);
+
     try {
-      const fiveWeeksSameDayData = await Day.find({
+      const numberOfWeeksSameDayData = await Day.find({
         date: { $in: dateArray },
       }).exec();
-
-      if (fiveWeeksSameDayData.length) {
+      // Check if retrived data contains requested date (Day data alredy exist in DB)
+      // If Notification, add it to retrived data with empty products array
+      if (numberOfWeeksSameDayData.length) {
         if (
-          fiveWeeksSameDayData[
-            fiveWeeksSameDayData.length - 1
-          ].date.toISOString() !== dateArray[0]
+          format(
+            numberOfWeeksSameDayData[numberOfWeeksSameDayData.length - 1].date,
+            "yyyy-MM-dd"
+          ) !== dateArray[0]
         ) {
-          fiveWeeksSameDayData.push({ date: dateArray[0], products: [] });
+          numberOfWeeksSameDayData.push({ date: dateArray[0], products: [] });
         }
 
         const withCoefficients =
-          calculateMedianCoefficients(fiveWeeksSameDayData);
-        return res.status(200).json([withCoefficients]);
+          calculateMedianCoefficients(numberOfWeeksSameDayData);
+        const finalData = {...withCoefficients, pastData: numberOfWeeksSameDayData}
+        return res.status(200).json([finalData]);
       }
 
       return res.status(200).json([]);
