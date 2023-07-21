@@ -10,9 +10,9 @@ const daySchema = new mongoose.Schema(
     day: { type: String },
     products: [
       {
-        name: String,
-        cases: String,
-        pallets: String,
+        name: { type: String, required: true },
+        cases: { type: String, default: "" },
+        pallets: { type: String, default: "" },
         category: String,
       },
     ],
