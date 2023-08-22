@@ -1,13 +1,49 @@
- #  The WPT (Warehouse Planning Tool)
-The WPT is a back-end repository for a MERN stack application that I am currently developing. This application is designed to help warehouses plan the number of trailers required to dispatch orders efficiently. The application utilizes AI to predict future orders based on past data, enabling warehouses to plan ahead and allocate resources more effectively.
+# WPT - Warehouse Planning Tool (Back-end)
 
-The application is being built using the MERN stack, which consists of MongoDB, ExpressJS, ReactJS, and Node.js. The back-end is being developed using Node.js and ExpressJS, while the front-end is being developed using ReactJS. MongoDB is being used as the database for the application.
+WPT Backend serves as the backbone for the Warehouse Planning Tool, providing the necessary APIs and data management functionalities to support the frontend application. This repository contains the server code built using Node.js, Express, and MongoDB with Mongoose for database interaction. Firebase is used for authentication, ensuring secure access to the application.
 
-The WPT will allow users to view the status of their orders and plan for the number of trailers required to dispatch them, which will help them allocate resources efficiently. The AI component of the application will use machine learning algorithms to analyze past data and predict future orders, giving users valuable insights into their order planning.
+## Key Technologies
 
-#### `This repository is open to collaboration and contributions from anyone who wants to help build this application. You can fork the repository and create a pull request with any changes you make, create an issue if you find any bugs or have any suggestions for new features, or reach out to me directly on LinkedIn or email with any ideas you have.`
+- **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine that allows you to execute server-side JavaScript.
+- **Express**: A web application framework for Node.js that simplifies the process of building robust APIs.
+- **MongoDB**: A NoSQL database used for storing and managing application data.
+- **Mongoose**: An Object Data Modeling (ODM) library for MongoDB and Node.js, providing a more structured way to interact with the database.
+- **date-fns**: A modern JavaScript date utility library used for handling date and time operations.
+- **Firebase Authentication**: A secure authentication method that integrates with Firebase to manage user access and authentication.
 
-## Please note that this is a work in progress and the application is not yet ready for use. This repository contains the code for the back-end logic of the application.
+## Deployment
 
+The deployed [Warehouse Planning Tool](https://warehouse-planning-tool.onrender.com/) 
 
 [Link to Front End Repo of this App](https://github.com/AleksandrRiabov/wpt)
+
+## Screenshots
+<img width="1219" alt="Warehouse Planning Tool dashboard, react" src="https://github.com/AleksandrRiabov/wpt/assets/61385379/451d3bc0-e894-4dfa-9ee8-d50f1a98027a">
+
+
+## Getting Started
+
+Follow these steps to set up and run the backend of the Warehouse Planning Tool:
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/AleksandrRiabov/wptbackend.git
+
+2. Install dependencies:
+   ```sh
+   cd wptbackend
+   npm install
+
+3. Set up environment variables:
+  - Create a .env file and configure it with the necessary environment variables. Including database connection details and Firebase configuration.
+
+4. Start the server:
+    ```sh
+   npm start
+
+
+### Contributing
+ - Contributions are welcome! If you find any issues or want to enhance the application, feel free to open an issue or submit a pull request.   
+  
+
+
