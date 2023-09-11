@@ -29,7 +29,7 @@ export const getDaysDataInRange = async (req, res) => {
 
     try {
       const days = await Day.find(query);
-      console.log(query);
+
       res.json(days);
     } catch (error) {
       res.status(500).json({ error: true, message: error.message });

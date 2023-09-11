@@ -32,9 +32,23 @@ const calculateCoefficient = (product) => {
   return product.cases / product.pallets;
 };
 
-// Function to calculate median of an array of numbers
+// Calculates the median of an array while excluding zeros if there's at least one positive number.
+// If all elements are zeros, it returns 0.
 const calculateMedian = (numbers) => {
-  const sortedNumbers = numbers.sort((a, b) => a - b);
+  // Check if there is at least one positive number
+  const hasPositiveNumber = numbers.some((number) => number > 0);
+
+  if (!hasPositiveNumber) {
+    // If there are no positive numbers, return 0
+    return 0;
+  }
+
+  // Filter out the zeros from the array
+  const filteredNumbers = numbers.filter((number) => number !== 0);
+
+  // Sort the filtered array in ascending order
+  const sortedNumbers = filteredNumbers.sort((a, b) => a - b);
+
   const mid = Math.floor(sortedNumbers.length / 2);
   if (sortedNumbers.length % 2 === 0) {
     return (sortedNumbers[mid - 1] + sortedNumbers[mid]) / 2;
