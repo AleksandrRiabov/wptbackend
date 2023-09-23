@@ -12,6 +12,7 @@ export const checkAuth = (req, res, next) => {
       .verifyIdToken(accessToken)
       .then((decodedToken) => {
         req.user = decodedToken; // Store the decoded token in the request object
+        console.log(decodedToken)
         next(); // Proceed to the next middleware or route handler
       })
       .catch((error) => {
